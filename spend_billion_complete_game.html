@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SPEND BILLION — The Ultimate Spending Challenge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0b0e;
+      --bg-secondary: #13161f;
+      --bg-card: #181c28;
+      --bg-card-hover: #1f2536;
+      --border-color: #272d42;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-green: #10b981;
+      --accent-green-hover: #059669;
+      --accent-glow: rgba(16, 185, 129, 0.15);
+      --danger: #ef4444;
+      --danger-hover: #dc2626;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 11, 14, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2rem;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-main);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: 0.05em;
+    }
+
+    .brand-icon {
+      color: var(--accent-green);
+      font-size: 1.2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--accent-green);
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-green);
+      color: #000;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-green-hover);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .btn-danger-outline {
+      background: transparent;
+      border: 1px solid var(--danger);
+      color: var(--danger);
+    }
+
+    .btn-danger-outline:hover:not(:disabled) {
+      background-color: var(--danger);
+      color: #fff;
+    }
+
+    .btn-sm {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .hero-section {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 3rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--accent-glow);
+      color: var(--accent-green);
+      padding: 0.35rem 0.85rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-title .highlight {
+      color: var(--accent-green);
+    }
+
+    .hero-description {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+      max-width: 600px;
+    }
+
+    .hero-image-wrapper {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      height: 320px;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, var(--bg-secondary), transparent);
+    }
+
+    .wallet-dashboard {
+      max-width: 1400px;
+      margin: 0 auto 2rem auto;
+      padding: 0 2rem;
+    }
+
+    .wallet-panel {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .wallet-main-display {
+      text-align: center;
+    }
+
+    .wallet-label {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .wallet-amount {
+      font-family: 'Outfit', sans-serif;
+      font-size: 4rem;
+      font-weight: 800;
+      color: var(--accent-green);
+      letter-spacing: -0.02em;
+    }
+
+    .wallet-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.5rem 0;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .stat-item .label {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .stat-item .value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .progress-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .progress-track {
+      height: 12px;
+      background: var(--bg-card);
+      border-radius: 50px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-green), #34d399);
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    .shop-section {
+      max-width: 1400px;
+      margin: 0 auto 3rem auto;
+      padding: 0 2rem;
+    }
+
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-title-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .results-count {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .shop-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .search-bar-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.9rem 1rem 0.9rem 3rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      font-size: 1rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-green);
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+
+    .category-list {
+      display: flex;
+      gap: 0.75rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+
+    .category-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+
+    .category-btn:hover, .category-btn.active {
+      background: var(--accent-green);
+      color: #000;
+      border-color: var(--accent-green);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .product-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--text-muted);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .product-image-container {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .product-card:hover .product-img {
+      transform: scale(1.05);
+    }
+
+    .product-category-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(8px);
+      color: var(--text-main);
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: 1px solid var(--border-color);
+    }
+
+    .product-info {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 1rem;
+    }
+
+    .product-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .product-description {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      flex: 1;
+    }
+
+    .product-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      border-top: 1px solid var(--border-color);
+      padding-top: 1rem;
+    }
+
+    .product-price {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent-green);
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .qty-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      width: 36px;
+      height: 38px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .qty-btn:hover {
+      background: var(--border-color);
+    }
+
+    .qty-input {
+      width: 45px;
+      text-align: center;
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-weight: 600;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .buy-btn {
+      flex: 1;
+      background: var(--accent-green);
+      color: #000;
+      border: none;
+      padding: 0.65rem;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .buy-btn:hover:not(:disabled) {
+      background: var(--accent-green-hover);
+    }
+
+    .buy-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .collection-section, .history-section {
+      max-width: 1400px;
+      margin: 0 auto 3rem auto;
+      padding: 0 2rem;
+    }
+
+    .collection-container-box, .history-container-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+    }
+
+    .collection-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .collection-title-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .collection-count-badge {
+      background: var(--accent-glow);
+      color: var(--accent-green);
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .collection-empty {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .collection-empty i {
+      font-size: 2.5rem;
+    }
+
+    .collection-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-height: 450px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+    }
+
+    .collection-row-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+      gap: 1.5rem;
+    }
+
+    .collection-item-thumb {
+      width: 60px;
+      height: 60px;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+    }
+
+    .collection-item-meta {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .collection-item-name {
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .collection-item-category {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .collection-item-qty, .collection-item-total {
+      font-weight: 600;
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      max-height: 350px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+    }
+
+    .history-entry {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 0.85rem 1.2rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+    }
+
+    .history-entry.purchase .history-amount {
+      color: var(--danger);
+      font-weight: 700;
+    }
+
+    .history-entry.refund .history-amount {
+      color: var(--accent-green);
+      font-weight: 700;
+    }
+
+    .history-details {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .history-timestamp {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .victory-banner {
+      max-width: 1400px;
+      margin: 0 auto 3rem auto;
+      padding: 0 2rem;
+    }
+
+    .victory-card {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), var(--bg-secondary));
+      border: 2px solid var(--accent-green);
+      border-radius: var(--radius-lg);
+      padding: 3rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      box-shadow: 0 0 40px var(--accent-glow);
+    }
+
+    .victory-icon {
+      font-size: 4rem;
+    }
+
+    .victory-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--accent-green);
+    }
+
+    .victory-description {
+      color: var(--text-muted);
+      max-width: 600px;
+      font-size: 1.05rem;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      z-index: 1000;
+      transform: translateY(150%);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-weight: 600;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast.success {
+      border-color: var(--accent-green);
+    }
+
+    .toast.error {
+      border-color: var(--danger);
+    }
+
+    .footer {
+      border-top: 1px solid var(--border-color);
+      background: var(--bg-secondary);
+      padding: 3rem 2rem;
+      margin-top: 4rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .footer-disclaimer {
+      border-top: 1px solid var(--border-color);
+      padding-top: 1.5rem;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+      }
+      .wallet-stats-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none;
+      }
+      .wallet-amount {
+        font-size: 2.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-brand">
+        <span class="brand-icon">◆</span>
+        <span class="brand-text">SPEND BILLION</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#" class="nav-link active">Home</a></li>
+          <li><a href="#shop" class="nav-link">Shop</a></li>
+          <li><a href="#collection" class="nav-link">My Collection</a></li>
+          <li><a href="#history" class="nav-link">Transaction History</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button type="button" id="resetTop" class="btn btn-danger-outline btn-sm">Reset Game</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge">Ultimate Spending Challenge</div>
+          <h1 class="hero-title">CAN YOU <span class="highlight">SPEND ONE BILLION?</span></h1>
+          <p class="hero-description">
+            You have inherited $1,000,000,000. Your sole mission is to spend every single penny before time runs out. Choose from elite supercars, private islands, mega-yachts, and luxury ventures.
+          </p>
+          <div class="hero-cta-group">
+            <a href="#shop" class="btn btn-primary">Start Spending</a>
+          </div>
+        </div>
+        <div class="hero-image-wrapper">
+          <img class="hero-image" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80" alt="Luxury Sports Car" loading="lazy">
+          <div class="hero-image-overlay"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wallet-dashboard">
+      <div class="wallet-panel">
+        <div class="wallet-main-display">
+          <div class="wallet-label">Remaining Balance</div>
+          <div id="balance" class="wallet-amount">$1,000,000,000</div>
+        </div>
+        <div class="wallet-stats-grid">
+          <div class="stat-item">
+            <span class="label">Total Spent</span>
+            <span id="spentLabel" class="value">$0</span>
+          </div>
+          <div class="stat-item">
+            <span class="label">Spent Percentage</span>
+            <span id="percentLabel" class="value">0.00%</span>
+          </div>
+          <div class="stat-item">
+            <span class="label">Items Owned</span>
+            <span id="itemsCount" class="value">0</span>
+          </div>
+        </div>
+        <div class="progress-container">
+          <div class="progress-header">
+            <span>Spending Progress</span>
+            <span>$1,000,000,000 Goal</span>
+          </div>
+          <div class="progress-track">
+            <div id="progressFill" class="progress-fill"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="shop" class="shop-section">
+      <div class="section-header">
+        <div class="section-title-wrapper">
+          <h2 class="section-title">Luxury Marketplace</h2>
+          <span id="resultsCount" class="results-count">Showing assets</span>
+        </div>
+        <div class="shop-controls">
+          <div class="search-bar-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" class="search-input" placeholder="Search supercars, villas, private jets, yachts...">
+          </div>
+          <div id="categoryList" class="category-list"></div>
+        </div>
+      </div>
+      <div id="productGrid" class="product-grid"></div>
+    </section>
+
+    <section id="collection" class="collection-section">
+      <div class="collection-container-box">
+        <div class="collection-header-row">
+          <div class="collection-title-group">
+            <h2 class="section-title">My Collection</h2>
+            <span id="collectionCount" class="collection-count-badge">0</span>
+          </div>
+          <button type="button" id="clearCollection" class="btn btn-danger-outline btn-sm" disabled>Clear Collection</button>
+        </div>
+        <div id="collectionEmpty" class="collection-empty">
+          <i>🛍️</i>
+          <p>Your collection is empty. Purchase assets from the shop above to build your empire.</p>
+        </div>
+        <div id="collectionList" class="collection-list" hidden></div>
+      </div>
+    </section>
+
+    <section id="history" class="history-section">
+      <div class="section-header" style="margin-bottom: 1.5rem;">
+        <h2 class="section-title" style="font-size: 1.5rem;">Transaction Log</h2>
+      </div>
+      <div class="history-container-box">
+        <div id="historyList" class="history-list"></div>
+      </div>
+    </section>
+
+    <section class="victory-banner">
+      <div id="finishBanner" class="victory-card" hidden>
+        <div class="victory-icon">🏆</div>
+        <h2 class="victory-title">CHALLENGE COMPLETED!</h2>
+        <p class="victory-description">
+          Incredible! You have successfully spent exactly $1,000,000,000 on the world's most luxurious assets. You are the ultimate spender.
+        </p>
+        <button type="button" id="playAgain" class="btn btn-primary">Play Again</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <p>SPEND BILLION — The premier virtual luxury spending simulation inspired by high-end automotive design and modern dashboards.</p>
+      <div class="footer-disclaimer">
+        Disclaimer: All money, transactions, and luxury assets in SPEND BILLION are entirely virtual and for entertainment purposes only. No real financial transactions take place.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Global PRODUCTS dataset as required
+    const PRODUCTS = [
+      { id: 1, name: "Big Mac", category: "Food", price: 6, image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1000&q=80", description: "Classic iconic fast food burger." },
+      { id: 2, name: "Flip Flops", category: "Fashion", price: 20, image: "https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?auto=format&fit=crop&w=1000&q=80", description: "Casual summer beach footwear." },
+      { id: 3, name: "Coca-Cola Pack", category: "Food", price: 30, image: "https://images.unsplash.com/photo-1554866585-cd94860890b7?auto=format&fit=crop&w=1000&q=80", description: "Refreshing carbonated beverages." },
+      { id: 4, name: "Video Game", category: "Entertainment", price: 60, image: "https://images.unsplash.com/photo-1612287233302-39c445653b6f?auto=format&fit=crop&w=1000&q=80", description: "Next-gen immersive blockbuster game." },
+      { id: 5, name: "Air Jordans", category: "Fashion", price: 200, image: "https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=1000&q=80", description: "Limited edition streetwear sneakers." },
+      { id: 6, name: "AirPods Pro", category: "Electronics", price: 250, image: "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?auto=format&fit=crop&w=1000&q=80", description: "Active noise cancellation wireless earbuds." },
+      { id: 7, name: "Gaming Console", category: "Electronics", price: 500, image: "https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=1000&q=80", description: "High-performance home entertainment system." },
+      { id: 8, name: "Drone", category: "Electronics", price: 800, image: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&w=1000&q=80", description: "4K cinematic aerial photography drone." },
+      { id: 9, name: "Smartphone", category: "Electronics", price: 1200, image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1000&q=80", description: "Flagship titanium smartphone with advanced optics." },
+      { id: 10, name: "Designer Handbag", category: "Fashion", price: 2500, image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1000&q=80", description: "Haute couture luxury leather accessory." },
+      { id: 11, name: "Gaming PC", category: "Electronics", price: 3500, image: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=1000&q=80", description: "Custom liquid-cooled monster rig for 4K gaming." },
+      { id: 12, name: "Designer Dress", category: "Fashion", price: 5000, image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1000&q=80", description: "Red carpet runway evening gown." },
+      { id: 13, name: "Luxury Watch", category: "Fashion", price: 15000, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1000&q=80", description: "Swiss automatic chronograph timeiece." },
+      { id: 14, name: "Jet Ski", category: "Vehicles", price: 20000, image: "https://images.unsplash.com/photo-1559827291-72ee739d0d9a?auto=format&fit=crop&w=1000&q=80", description: "High-speed personal watercraft." },
+      { id: 15, name: "Rolex", category: "Fashion", price: 25000, image: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=1000&q=80", description: "Iconic oystersteel luxury status watch." },
+      { id: 16, name: "Hot Tub", category: "Real Estate", price: 30000, image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1000&q=80", description: "Hydrotherapy luxury spa for backyard relaxation." },
+      { id: 17, name: "Sport Motorcycle", category: "Vehicles", price: 40000, image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=1000&q=80", description: "Track-ready superbike with blistering acceleration." },
+      { id: 18, name: "Smart TV", category: "Electronics", price: 45000, image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=1000&q=80", description: "98-inch OLED cinematic display." },
+      { id: 19, name: "Tesla Roadster", category: "Vehicles", price: 200000, image: "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=1000&q=80", description: "All-electric supercar with rocket thruster option." },
+      { id: 20, name: "Ferrari", category: "Vehicles", price: 300000, image: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=1000&q=80", description: "V12 Italian masterpiece engineering." },
+      { id: 21, name: "Lamborghini", category: "Vehicles", price: 350000, image: "https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=1000&q=80", description: "Aggressive styling and roaring twin-turbo power." },
+      { id: 22, name: "Bugatti", category: "Vehicles", price: 2500000, image: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=1000&q=80", description: "Hypercar capable of 300+ mph." },
+      { id: 23, name: "Luxury Yacht", category: "Vehicles", price: 7500000, image: "https://images.unsplash.com/photo-1569263979104-865ab9cd8d57?auto=format&fit=crop&w=1000&q=80", description: "Floating mega-mansion with helipad and pool." },
+      { id: 24, name: "Private Jet", category: "Vehicles", price: 40000000, image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1000&q=80", description: "Intercontinental private luxury aircraft." },
+      { id: 25, name: "Mansion", category: "Real Estate", price: 50000000, image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1000&q=80", description: "Beverly Hills estate with panoramic views." },
+      { id: 26, name: "Private Island", category: "Real Estate", price: 100000000, image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80", description: "Secluded tropical paradise with white sand beaches." }
+    ];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof PRODUCTS === "undefined" || !Array.isArray(PRODUCTS)) {
+        console.error("CRITICAL: PRODUCTS array is not defined.");
+        return;
+      }
+
+      const INITIAL_BALANCE = 1000000000;
+      const STORAGE_KEY = "spend_billion_state_v3";
+
+      let state = {
+        balance: INITIAL_BALANCE,
+        collection: {},
+        history: [],
+        currentCategory: "All",
+        searchQuery: ""
+      };
+
+      const el = {
+        balance: document.getElementById("balance"),
+        spentLabel: document.getElementById("spentLabel"),
+        percentLabel: document.getElementById("percentLabel"),
+        progressFill: document.getElementById("progressFill"),
+        itemsCount: document.getElementById("itemsCount"),
+        searchInput: document.getElementById("searchInput"),
+        categoryList: document.getElementById("categoryList"),
+        resultsCount: document.getElementById("resultsCount"),
+        productGrid: document.getElementById("productGrid"),
+        collectionCount: document.getElementById("collectionCount"),
+        collectionEmpty: document.getElementById("collectionEmpty"),
+        collectionList: document.getElementById("collectionList"),
+        clearCollection: document.getElementById("clearCollection"),
+        historyList: document.getElementById("historyList"),
+        finishBanner: document.getElementById("finishBanner"),
+        playAgain: document.getElementById("playAgain"),
+        resetTop: document.getElementById("resetTop"),
+        toast: document.getElementById("toast")
+      };
+
+      function formatCurrency(amount) {
+        return "$" + Number(amount).toLocaleString("en-US");
+      }
+
+      function formatTime(timestamp) {
+        const date = new Date(timestamp);
+        return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      }
+
+      let toastTimeout = null;
+      function showToast(message, type = "success") {
+        if (!el.toast) return;
+        el.toast.textContent = message;
+        el.toast.className = `toast ${type} show`;
+
+        if (toastTimeout) clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          el.toast.classList.remove("show");
+        }, 3500);
+      }
+
+      function loadState() {
+        try {
+          const saved = localStorage.getItem(STORAGE_KEY);
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            if (
+              typeof parsed.balance === "number" &&
+              parsed.balance >= 0 &&
+              parsed.balance <= INITIAL_BALANCE &&
+              typeof parsed.collection === "object" &&
+              Array.isArray(parsed.history)
+            ) {
+              state.balance = parsed.balance;
+              state.collection = parsed.collection;
+              state.history = parsed.history;
+            }
+          }
+        } catch (e) {
+          console.warn("Could not load saved state", e);
+        }
+      }
+
+      function saveState() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify({
+            balance: state.balance,
+            collection: state.collection,
+            history: state.history
+          }));
+        } catch (e) {}
+      }
+
+      function resetGame() {
+        state.balance = INITIAL_BALANCE;
+        state.collection = {};
+        state.history = [];
+        state.currentCategory = "All";
+        if (el.searchInput) el.searchInput.value = "";
+        state.searchQuery = "";
+        
+        try {
+          localStorage.removeItem(STORAGE_KEY);
+        } catch (e) {}
+
+        updateUI();
+        showToast("Game reset successfully. Back to $1,000,000,000!", "success");
+      }
+
+      function updateUI() {
+        const spent = INITIAL_BALANCE - state.balance;
+        const percent = Math.min(100, Math.max(0, (spent / INITIAL_BALANCE) * 100));
+
+        let totalItems = 0;
+        Object.keys(state.collection).forEach(id => {
+          totalItems += state.collection[id].quantity;
+        });
+
+        if (el.balance) el.balance.textContent = formatCurrency(state.balance);
+        if (el.spentLabel) el.spentLabel.textContent = formatCurrency(spent);
+        if (el.percentLabel) el.percentLabel.textContent = percent.toFixed(2) + "%";
+        if (el.progressFill) el.progressFill.style.width = percent + "%";
+        if (el.itemsCount) el.itemsCount.textContent = totalItems.toLocaleString();
+        if (el.collectionCount) el.collectionCount.textContent = totalItems;
+
+        if (el.finishBanner) {
+          el.finishBanner.hidden = (state.balance !== 0);
+        }
+
+        renderProducts();
+        renderCollection();
+        renderHistory();
+        saveState();
+      }
+
+      function buildCategories() {
+        if (!el.categoryList) return;
+        const categories = ["All", ...new Set(PRODUCTS.map(p => p.category))];
+        
+        el.categoryList.innerHTML = "";
+        categories.forEach(cat => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = `category-btn ${state.currentCategory === cat ? "active" : ""}`;
+          btn.textContent = cat;
+          btn.addEventListener("click", () => {
+            state.currentCategory = cat;
+            el.categoryList.querySelectorAll(".category-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            renderProducts();
+          });
+          el.categoryList.appendChild(btn);
+        });
+      }
+
+      function renderProducts() {
+        if (!el.productGrid) return;
+
+        const query = state.searchQuery.toLowerCase().trim();
+        const filtered = PRODUCTS.filter(product => {
+          const matchesCategory = state.currentCategory === "All" || product.category === state.currentCategory;
+          const matchesSearch = 
+            product.name.toLowerCase().includes(query) ||
+            product.category.toLowerCase().includes(query) ||
+            product.description.toLowerCase().includes(query);
+          return matchesCategory && matchesSearch;
+        });
+
+        if (el.resultsCount) {
+          el.resultsCount.textContent = `Showing ${filtered.length} of ${PRODUCTS.length} luxury assets`;
+        }
+
+        el.productGrid.innerHTML = "";
+
+        if (filtered.length === 0) {
+          el.productGrid.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-muted);">
+              <p style="font-size: 1.1rem; font-weight: 600;">No luxury assets found matching your criteria.</p>
+            </div>
+          `;
+          return;
+        }
+
+        filtered.forEach(product => {
+          const card = document.createElement("div");
+          card.className = "product-card";
+
+          card.innerHTML = `
+            <div class="product-image-container">
+              <span class="product-category-badge">${product.category}</span>
+              <img class="product-img" src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1000&q=80'">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">${product.name}</h3>
+              <p class="product-description">${product.description}</p>
+              <div class="product-footer">
+                <div class="product-price">${formatCurrency(product.price)}</div>
+                <div class="product-actions">
+                  <div class="quantity-control">
+                    <button type="button" class="qty-btn qty-minus" aria-label="Decrease quantity">-</button>
+                    <input type="number" class="qty-input" value="1" min="1" max="999" aria-label="Quantity">
+                    <button type="button" class="qty-btn qty-plus" aria-label="Increase quantity">+</button>
+                  </div>
+                  <button type="button" class="buy-btn" data-id="${product.id}">Buy</button>
+                </div>
+              </div>
+            </div>
+          `;
+
+          const qtyInput = card.querySelector(".qty-input");
+          const minusBtn = card.querySelector(".qty-minus");
+          const plusBtn = card.querySelector(".qty-plus");
+          const buyBtn = card.querySelector(".buy-btn");
+
+          minusBtn.addEventListener("click", () => {
+            let val = parseInt(qtyInput.value) || 1;
+            if (val > 1) qtyInput.value = val - 1;
+          });
+
+          plusBtn.addEventListener("click", () => {
+            let val = parseInt(qtyInput.value) || 1;
+            if (val < 999) qtyInput.value = val + 1;
+          });
+
+          qtyInput.addEventListener("change", () => {
+            let val = parseInt(qtyInput.value) || 1;
+            if (val < 1) qtyInput.value = 1;
+            if (val > 999) qtyInput.value = 999;
+          });
+
+          const unitPrice = product.price;
+          if (state.balance < unitPrice) {
+            buyBtn.disabled = true;
+          }
+
+          buyBtn.addEventListener("click", () => {
+            const qty = parseInt(qtyInput.value) || 1;
+            const totalCost = unitPrice * qty;
+
+            if (state.balance < totalCost) {
+              showToast(`Cannot afford ${qty}x ${product.name}! Insufficient funds.`, "error");
+              return;
+            }
+
+            state.balance -= totalCost;
+
+            if (state.collection[product.id]) {
+              state.collection[product.id].quantity += qty;
+            } else {
+              state.collection[product.id] = { product: product, quantity: qty };
+            }
+
+            state.history.unshift({
+              id: 'tx-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5),
+              type: 'purchase',
+              productName: `${qty}x ${product.name}`,
+              amount: totalCost,
+              timestamp: Date.now()
+            });
+
+            showToast(`Successfully purchased ${qty}x ${product.name}!`, "success");
+            updateUI();
+          });
+
+          el.productGrid.appendChild(card);
+        });
+      }
+
+      function renderCollection() {
+        if (!el.collectionList || !el.collectionEmpty) return;
+
+        const itemIds = Object.keys(state.collection);
+
+        if (itemIds.length === 0) {
+          el.collectionEmpty.hidden = false;
+          el.collectionList.hidden = true;
+          el.collectionList.innerHTML = "";
+          if (el.clearCollection) el.clearCollection.disabled = true;
+          return;
+        }
+
+        el.collectionEmpty.hidden = true;
+        el.collectionList.hidden = false;
+        if (el.clearCollection) el.clearCollection.disabled = false;
+
+        el.collectionList.innerHTML = "";
+
+        itemIds.forEach(id => {
+          const entry = state.collection[id];
+          const prod = entry.product;
+          const qty = entry.quantity;
+          const totalItemPrice = prod.price * qty;
+
+          const row = document.createElement("div");
+          row.className = "collection-row-item";
+          row.innerHTML = `
+            <img class="collection-item-thumb" src="${prod.image}" alt="${prod.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1000&q=80'">
+            <div class="collection-item-meta">
+              <span class="collection-item-name">${prod.name}</span>
+              <span class="collection-item-category">${prod.category}</span>
+            </div>
+            <div class="collection-item-qty">Qty: ${qty}</div>
+            <div class="collection-item-total">${formatCurrency(totalItemPrice)}</div>
+            <button type="button" class="btn btn-danger-outline btn-sm refund-btn" data-id="${id}">Refund / Undo</button>
+          `;
+
+          const refundBtn = row.querySelector(".refund-btn");
+          refundBtn.addEventListener("click", () => {
+            state.balance += totalItemPrice;
+
+            state.history.unshift({
+              id: 'tx-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5),
+              type: 'refund',
+              productName: `${qty}x ${prod.name}`,
+              amount: totalItemPrice,
+              timestamp: Date.now()
+            });
+
+            delete state.collection[id];
+            showToast(`Refunded ${qty}x ${prod.name} (+${formatCurrency(totalItemPrice)})`, "error");
+            updateUI();
+          });
+
+          el.collectionList.appendChild(row);
+        });
+      }
+
+      function renderHistory() {
+        if (!el.historyList) return;
+
+        if (state.history.length === 0) {
+          el.historyList.innerHTML = `
+            <div style="text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.9rem;">
+              No transactions yet. Start spending your billion!
+            </div>
+          `;
+          return;
+        }
+
+        el.historyList.innerHTML = "";
+
+        state.history.forEach(tx => {
+          const entryDiv = document.createElement("div");
+          entryDiv.className = `history-entry ${tx.type}`;
+          const actionText = tx.type === 'purchase' ? 'Purchased' : 'Refunded';
+
+          entryDiv.innerHTML = `
+            <div class="history-details">
+              <span class="history-timestamp">${formatTime(tx.timestamp)}</span>
+              <span class="history-action-text"><strong>${actionText}</strong> ${tx.productName}</span>
+            </div>
+            <div class="history-amount">${tx.type === 'purchase' ? '-' : '+'}${formatCurrency(tx.amount)}</div>
+          `;
+
+          el.historyList.appendChild(entryDiv);
+        });
+      }
+
+      function initEventListeners() {
+        if (el.searchInput) {
+          el.searchInput.addEventListener("input", (e) => {
+            state.searchQuery = e.target.value;
+            renderProducts();
+          });
+        }
+
+        if (el.resetTop) {
+          el.resetTop.addEventListener("click", resetGame);
+        }
+
+        if (el.playAgain) {
+          el.playAgain.addEventListener("click", resetGame);
+        }
+
+        if (el.clearCollection) {
+          el.clearCollection.addEventListener("click", () => {
+            if (Object.keys(state.collection).length === 0) return;
+
+            let totalRefund = 0;
+            Object.keys(state.collection).forEach(id => {
+              const entry = state.collection[id];
+              totalRefund += entry.product.price * entry.quantity;
+            });
+
+            state.balance += totalRefund;
+            state.collection = {};
+
+            state.history.unshift({
+              id: 'tx-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5),
+              type: 'refund',
+              productName: 'Entire Collection',
+              amount: totalRefund,
+              timestamp: Date.now()
+            });
+
+            showToast(`Cleared entire collection! Refunded ${formatCurrency(totalRefund)}.`, "error");
+            updateUI();
+          });
+        }
+      }
+
+      loadState();
+      buildCategories();
+      initEventListeners();
+      updateUI();
+    });
+  </script>
+</body>
+</html>
